@@ -69,5 +69,6 @@ int main()
     cout<<"dequeued : "<<dequeue(queue)<<endl;
     cout<<"front : "<<front(queue)<<endl;
     cout<<"rear : "<<rear(queue)<<endl;
+    
     return 0;
 }
