@@ -226,6 +226,7 @@ int main()
 {
     struct node *head=NULL;
     int a[]={1,3,5,7};
+
     create(a,4,&head);
     display(head);
     deletenode(&head,1);
@@ -241,6 +242,7 @@ int main()
     reverselink(&head);
     display(head);
     reverselink(&head);
+
     struct node *second=NULL;
     int b[]={2,4,6,8};
     create(b,4,&second);
@@ -249,5 +251,6 @@ int main()
     makenonlinear(&head);
     islinear(head);
     display(removeduplicate2(&head));
+    
     return 0;
 }
