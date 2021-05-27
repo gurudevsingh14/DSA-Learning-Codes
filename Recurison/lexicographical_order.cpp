@@ -7,7 +7,6 @@ example input : 13
 #include<bits/stdc++.h>
 using namespace std;
 
-int totalPaths = 0;
 void lexicoOrder(int n, int i)
 {
   if (i > n)
