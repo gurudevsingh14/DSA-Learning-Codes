@@ -40,7 +40,7 @@ int main()
     while (!q.empty())
     {
         temp = q.front();
-        cout << "left and right child of " << count << print(count) << "node : ";//labeling of nodes is done level order wise
+        cout << "enter value of left and right child of " << count << print(count) << "node : ";//nodes are labeled level order wise
         cin >> left;//enter -1 if their is no left child
         cin >> right;//enter -1 if their is no right child
         if (left != -1) {
