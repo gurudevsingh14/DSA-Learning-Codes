@@ -97,6 +97,22 @@ void itrativePostorder(node* root)
         ans.pop();
     }
 }
+void levelorder(node* root)
+{
+    queue<node*>q;
+    node* temp = root;
+    q.push(root);
+    while (!q.empty())
+    {
+        cout << temp->val << " ";
+        if (temp->left)
+            q.push(temp->left);
+        if (temp->right)
+            q.push(temp->right);
+        q.pop();
+        temp = q.front();
+    }
+}
 string print(int n)
 {
     if (n == 1) return " st (root) ";
@@ -117,7 +133,10 @@ int main()
     while (!q.empty())
     {
         temp = q.front();
-        cout << "enter value of left and right child of " << count << print(count) << "node : ";//nodes are labeled level order wise
+
+        //nodes are labeled level order wise and labeling is identical for each node :-
+        cout << "enter value of left and right child of " << count << print(count) << "node : ";
+
         cin >> left;//enter -1 if their is no left child
         cin >> right;//enter -1 if their is no right child
         if (left != -1) {
@@ -138,15 +157,23 @@ int main()
     cout << endl;
     itrativePreorder(root);
     cout << endl;
+
     cout << "\nInorder traversal : \n";
     inorder(root);
     cout << endl;
     itrativeInorder(root);
     cout << endl;
+
     cout << "\nPostorder traversal : \n";
     postorder(root);
     cout << endl;
     itrativePostorder(root);
+    cout << endl;
 
+    cout << "\nLevel order traversal : \n";
+    levelorder(root);
+    
     return 0;
 }
+
+
