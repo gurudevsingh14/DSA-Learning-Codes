@@ -25,6 +25,7 @@ public:
     void bfs();
     void dfs();
     void _dfs(int node);
+    void _bfs(int node);
     void printAdjList();
 };
 void Graph::printAdjList()
@@ -46,32 +47,36 @@ void Graph::addEdge(int a, int b)
     adj[a].push_back(b);
     adj[b].push_back(a);
 }
+void Graph::_bfs(int node)
+{
+    queue<int>q;
+    q.push(node);
+    visited[node] = true;
+    while (!q.empty())
+    {
+        node = q.front();
+        q.pop();
+        int m = adj[node].size();
+        for (int i = 0; i < m; i++)
+        {
+            int adjNode = adj[node][i];
+            if (!visited[adjNode]) {
+                q.push(adjNode);
+                visited[adjNode] = true;
+            }
+        }
+        cout << node << " ";
+    }
+}
 void Graph::bfs()
 {
     visited.clear();
-    queue<int>q;
-    int node, m;
+    int node;
     for (auto itr = adj.begin(); itr != adj.end(); itr++)
     {
         node = itr->first;
         if (!visited[node]) {
-            q.push(node);
-            visited[node] = true;
-            while (!q.empty())
-            {
-                node = q.front();
-                q.pop();
-                m = adj[node].size();
-                for (int i = 0; i < m; i++)
-                {
-                    int adjNode = adj[node][i];
-                    if (!visited[adjNode]) {
-                        q.push(adjNode);
-                        visited[adjNode] = true;
-                    }
-                }
-                cout << node << " ";
-            }
+            _bfs(node);
             cout << "\n";
         }
     }
