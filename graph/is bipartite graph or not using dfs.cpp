@@ -60,7 +60,6 @@ bool Graph::checkBipartite(int currNode)
         visited[currNode] = true;
         colored[currNode] = blue;
     }
-    int m = adj[currNode].size();
     for (int adjNode : adj[currNode])
     {
         if (!visited[adjNode]) {
@@ -79,7 +78,6 @@ bool Graph::checkBipartite(int currNode)
 bool Graph::isBipartite()
 {
     reset();
-    unordered_map<int, int>colored;
     for (auto itr = adj.begin(); itr != adj.end(); itr++)
     {
         int node = itr->first;
