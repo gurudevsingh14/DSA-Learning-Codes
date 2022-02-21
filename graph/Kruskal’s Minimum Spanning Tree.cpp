@@ -9,17 +9,14 @@ private:
     int *rank;
     vector<vector<int>>result;//{source, destination, weight}
     vector<vector<int>>edges;//{source, destination, weight}
-    int* subset;
 public:
     Graph(int vertex, int edgeCount)
     {
         V = vertex;
-        subset = new int[V];
         parent = new int[V];
         rank = new int[V];
         for (int i = 0; i < V; i++)
         {
-            subset[i] = i;
             parent[i] = i;
             rank[i] = 0;
         }
