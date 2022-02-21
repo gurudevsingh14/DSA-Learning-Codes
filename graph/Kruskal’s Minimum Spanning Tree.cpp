@@ -5,17 +5,23 @@ class Graph
 private:
     int edgeCount;// no. of edges
     int V;//no. of vertex
+    int *parent;
+    int *rank;
     vector<vector<int>>result;//{source, destination, weight}
     vector<vector<int>>edges;//{source, destination, weight}
     int* subset;
 public:
     Graph(int vertex, int edgeCount)
     {
-        V = vertex + 1;
+        V = vertex;
         subset = new int[V];
+        parent = new int[V];
+        rank = new int[V];
         for (int i = 0; i < V; i++)
         {
             subset[i] = i;
+            parent[i] = i;
+            rank[i] = 0;
         }
 
         this->edgeCount = edgeCount;
@@ -23,7 +29,7 @@ public:
         cout << "enter " << edgeCount << " edges : \n";
         for (int i = 0; i < edgeCount; i++)
         {
-            cin >> a >> b >> weight;
+            cin >> weight >> a >> b;
             addEdge(a, b, weight);
         }
         sort(edges.begin(), edges.end(), compare);
@@ -48,15 +54,28 @@ void Graph::addEdge(int a, int b, int weight)
 }
 int Graph::find(int x)
 {
-    if (subset[x] == x)
-    {
+    if (parent[x] == x) {
         return x;
     }
-    return find(subset[x]);
+    int root = find(parent[x]);
+    parent[x] = root;
+    return root;
 }
 void Graph::unionV(int x, int y)
 {
-    subset[x] = y;
+    x = find(x);
+    y = find(y);
+    if (rank[x] > rank[y]) {
+        parent[y] = x;
+    }
+    else if (rank[x] < rank[y]) {
+        parent[x] = y;
+    }
+    else
+    {
+        parent[x] = y;
+        rank[y]++;
+    }
 }
 void Graph::KruskalMst()
 {
@@ -70,7 +89,7 @@ void Graph::KruskalMst()
         if (xroot != yroot)
         {
             result.push_back({x, y, edges[i][2]});
-            unionV(xroot, yroot);
+            unionV(x, y);
             counte++;
         }
     }
